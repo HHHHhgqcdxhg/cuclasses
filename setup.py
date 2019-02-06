@@ -5,7 +5,7 @@ with open("README.md", "r",encoding="utf8") as fh:
 
 setuptools.setup(
     name="cuclasses",
-    version="0.0.1",
+    version="0.0.2",
     author="HHHHhg",
     author_email="2894700792@qq.com",
     description="useful classes",
