@@ -1,2 +1,2 @@
 # cuclasses
-python常用类,慢慢积累ing
+python常用类和方法,慢慢积累ing
