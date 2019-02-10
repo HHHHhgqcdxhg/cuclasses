@@ -3,6 +3,6 @@ from .SingletonDecoration import singleton
 from .CallableDict import CallableDict
 from .StrKeyDict import StrKeyDict
 from .HeaderCopy import *
-from .TimePrint import timePrint
+from .TimePrint import timePrint,_timePrint
 
 name = "cuclasses"
