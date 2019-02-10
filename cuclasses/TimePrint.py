@@ -1,10 +1,9 @@
-from contextlib import contextmanager
 from datetime import datetime
-from SingletonDecoration import singleton
 
 rawPrint = print
 
-def _timePrint(*args,**kwargs):
+
+def _timePrint(*args, **kwargs):
     try:
         strf = kwargs["strf"]
     except:
@@ -12,15 +11,19 @@ def _timePrint(*args,**kwargs):
     else:
         del kwargs["strf"]
     timeStr = datetime.now().strftime(strf)
-    rawPrint(timeStr,*args,**kwargs)
+    rawPrint(timeStr, *args, **kwargs)
+
 
 class timePrint:
     """带时间戳的print"""
-    def __init__(self,strf="[%Y-%m-%d %H:%M:%S]"):
+
+    def __init__(self, strf="[%Y-%m-%d %H:%M:%S]"):
         self.__strf = strf
+
     def __enter__(self):
         self.__mode = 1
         return self
+
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.__mode = 0
 
@@ -30,6 +33,7 @@ class timePrint:
             _timePrint(*args, **kwargs)
         else:
             rawPrint(*args, **kwargs)
+
 
 if __name__ == '__main__':
     with timePrint() as print:
