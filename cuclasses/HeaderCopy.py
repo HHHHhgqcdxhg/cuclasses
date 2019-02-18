@@ -1,7 +1,8 @@
 def headerCopy2Dict(headerStr: str):
-    d = {kv.split(":")[0].rstrip(): kv.split(":")[1].lstrip() for kv in headerStr.split("\n")}
+    d = {kv.split(":")[0].rstrip(): ":".join(kv.split(":")[1:]).lstrip() for kv in headerStr.split("\n")}
     if "Cookie" in d:
-        d["Cookie"] = cookiesCopy2Dict(d["Cookie"])
+        # d["Cookie"] = cookiesCopy2Dict(d["Cookie"])
+        del d["Cookie"]
     return d
 
 
