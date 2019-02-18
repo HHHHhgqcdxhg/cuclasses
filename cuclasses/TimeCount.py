@@ -1,8 +1,7 @@
 import time
 from functools import wraps
 
-def a():return None
-def timeCount(enable:bool=True, method:dict(type=type(a), help="""method to count time;可选择的计时所用的获取时间的函数.默认time.perf_counter,或者也可以选填time.time,python3.7可以按需选用time.perf_counter_ns""")=time.perf_counter):
+def timeCount(enable:bool=True, method:dict(help="""method to count time;可选择的计时所用的获取时间的函数.默认time.perf_counter,或者也可以选用time.time,python3.7可以按需选用time.perf_counter_ns""")=time.perf_counter):
     """
     装饰器,被装饰的函数将在执行后打印执行时间
     :param enable: 设为False则不计时,直接执行函数
