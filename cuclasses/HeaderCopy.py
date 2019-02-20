@@ -19,4 +19,3 @@ Referer: https://www.bilibili.com/video/av9912938/?p=11
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36"""
     a = headerCopy2Dict(headerStr)
     print(a)
-    print(a["Cookie"])
