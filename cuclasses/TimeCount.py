@@ -28,7 +28,8 @@ def timeCount(enable:bool=True, method:dict(help="""method to count time;可选�
 
 if __name__ == '__main__':
     @timeCount()
-    def cccccccccc():
+    def bar():
         print({"a": "c"})
 
-    print(timeCount.__annotations__)
+    bar()
+    # print(timeCount.__annotations__)
