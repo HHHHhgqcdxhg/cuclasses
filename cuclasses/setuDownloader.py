@@ -1,4 +1,4 @@
-import json
+import json,copy
 import requests
 from bs4 import BeautifulSoup
 bs = BeautifulSoup
@@ -45,19 +45,54 @@ cookiesRaw = """[
     "storeId": "0",
     "value": "b1d7d5acd649a01a1643124c8a0918a8",
     "id": 3
+},
+{
+    "domain": ".exhentai.org",
+    "hostOnly": false,
+    "httpOnly": false,
+    "name": "sk",
+    "path": "/",
+    "sameSite": "no_restriction",
+    "secure": false,
+    "session": true,
+    "storeId": "0",
+    "value": "7uinjlvvk29u0peb9atzgq7cwxzp",
+    "id": 4
+},
+{
+    "domain": ".exhentai.org",
+    "hostOnly": false,
+    "httpOnly": false,
+    "name": "yay",
+    "path": "/",
+    "sameSite": "no_restriction",
+    "secure": false,
+    "session": true,
+    "storeId": "0",
+    "value": "0",
+    "id": 5
 }
 ]"""
 cookies = json.loads(cookiesRaw)
 cookies = {cookie["name"]:cookie["value"] for cookie in cookies}
 
 headers={
-"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36"
+"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36",
 }
 
 def getPages(indexUrl):
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36",
+        "Host": "exhentai.org",
+        "Referer": "https://exhentai.org/g/1380023/2fe26d65d1/?p=1"
+    }
     res = requests.get(indexUrl,cookies=cookies,headers=headers)
+    print(res.status_code)
     html = res.text
+    print(html)
+    print(html)
     soup = BeautifulSoup(html,"lxml")
+
     return [page["href"] for page in  soup.select("div#gdt a")]
 
 def getPageSetuURL(pageURL):
@@ -82,9 +117,11 @@ def getSetu(indexURL:"exhentai本子主页",saveDire,maxWorks=20):
     with futures.ThreadPoolExecutor(maxWorks) as exe:
         exe.map(getPageSetu_,pages)
 
-
 if __name__ == '__main__':
-    savePath = r"E:\ACG\comic\r\NL\泡姬\11"
-    indexURL = "https://exhentai.org/g/1260338/952e2eb3fa/"
+    savePath = r"E:\ACG\comic\r\NL\鳩羽つぐのこの娘にしました (鳩羽つぐ)"
+    # indexURL = "https://exhentai.org"
+    indexURL = "https://exhentai.org/g/1358244/91371f4651/"
 
-    getSetu(indexURL,savePath,10)
+    getSetu(indexURL,savePath,20)
+    # with futures.ThreadPoolExecutor(4) as exe:
+    #     exe.map(getPageSetu_,pages)
